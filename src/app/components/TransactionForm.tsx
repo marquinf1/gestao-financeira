@@ -1,50 +1,52 @@
 'use client'
 
-import React, { useState } from 'react';
-import { useFinanceStore } from '../store/financeStore';
+import { useState } from 'react';
 
+interface TransactionFormProps {
+  onAddTransaction: (transaction: { amount: number; category: string }) => void;
+}
 
-const TransactionForm: React.FC = () => {
-  const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState('');
-  const addTransaction = useFinanceStore(state => state.addTransaction);
+const TransactionForm: React.FC<TransactionFormProps> = ({ onAddTransaction }) => {
+  const [amount, setAmount] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!amount || !category) {
-      alert("Preencha todos os campos");
-      return;
+    alert("Preencha todos os campos");
+    return;
     }
     const transaction = {
-      id: Date.now(),
-      amount: parseFloat(amount),
-      type: 'expense' as 'expense',
+     amount: parseFloat(amount),
       category
-    };
-    addTransaction(transaction);
+  };
+    await onAddTransaction(transaction);
+    window.dispatchEvent(new Event('transaction-added'));
     setAmount('');
     setCategory('');
   };
 
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+    <form onSubmit={handleSubmit}>
       <input
         type="number"
-        placeholder="Valor do Gasto"
         value={amount}
         onChange={e => setAmount(e.target.value)}
-        className="input border-2 p-2"
+        placeholder="Valor do Gasto"
+        className="mb-2 p-2 border rounded"
       />
       <input
         type="text"
-        placeholder="Categoria"
         value={category}
         onChange={e => setCategory(e.target.value)}
-        className="input border-2 p-2"
+        placeholder="Categoria"
+        className="mb-2 p-2 border rounded"
       />
-      <button type="submit" className="mb-2 button bg-blue-500 text-white p-2 rounded">Adicionar Gasto</button>
+      <button type="submit" className="p-2 bg-blue-500 text-white">Adicionar Gasto</button>
     </form>
   );
 };
 
 export default TransactionForm;
+

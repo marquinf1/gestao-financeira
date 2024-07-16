@@ -1,21 +1,24 @@
 import create from 'zustand';
 
-type Transaction = {
+interface Transaction {
   id: number;
   amount: number;
-  type: 'income' | 'expense';
-  category?: string;
-};
+  category: string;
+  [key: string]: number | string | undefined;
+}
 
 interface FinanceState {
   transactions: Transaction[];
   addTransaction: (transaction: Transaction) => void;
+  setTransactions: (transactions: Transaction[]) => void;
 }
 
 export const useFinanceStore = create<FinanceState>((set) => ({
   transactions: [],
   addTransaction: (transaction) =>
     set((state) => ({
-      transactions: [...state.transactions, transaction],
+      transactions: [...state.transactions, transaction]
     })),
+  setTransactions: (transactions) => 
+    set({ transactions })
 }));
