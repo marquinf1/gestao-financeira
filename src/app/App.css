@@ -1,0 +1,71 @@
+.app-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.form-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.input,
+.select,
+.button {
+  padding: 8px;
+}
+
+.select {
+  width: 150px;
+}
+
+.button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+
+body, input, select, button, textarea, h1, h2, h3, h4, h5, h6, p, div {
+  color: #000;
+}
+
+.rdg-light .rdg-cell,
+.rdg-light .rdg-header-cell {
+  color: #000;
+}
+
+/* Estilos gerais para a tabela */
+.flex-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Cabeçalho da tabela com fundo cinza escuro */
+.flex-table-header {
+  background-color: #333;
+  /* Cinza escuro */
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Células da tabela com bordas */
+.flex-table-cell {
+  border: 1px solid #ccc;
+  /* Cinza claro para as linhas */
+  padding: 8px;
+  text-align: left;
+}
+
+/* Aplicar estilos também no conteúdo do cabeçalho */
+.flex-table-cell-header {
+  border: 1px solid #ccc;
+}
